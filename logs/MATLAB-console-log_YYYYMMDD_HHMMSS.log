@@ -1,0 +1,150 @@
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [setupLogging (line 28)] Log file created: C:/Users/{UserName}/ThetaBurstFeatureExtraction/logs/MATLAB-console-log_{Timestamp}.log
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [setupProject (line 27)] Starting project setup...
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [createDirectories (line 25)] Directory already exists: C:/Users/{UserName}/ThetaBurstFeatureExtraction
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [createDirectories (line 25)] Directory already exists: C:/Users/{UserName}/ThetaBurstFeatureExtraction/src
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [createDirectories (line 19)] Created directory: C:/Users/{UserName}/ThetaBurstFeatureExtraction/data/pre-processed
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [createDirectories (line 19)] Created directory: C:/Users/{UserName}/ThetaBurstFeatureExtraction/data/cycle_features
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [setupProject (line 36)] Required directories are set up.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [verifyAndMoveFiles (line 57)] File already in correct directory: C:/Users/{UserName}/ThetaBurstFeatureExtraction/MAIN.m
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [verifyAndMoveFiles (line 57)] File already in correct directory: C:/Users/{UserName}/ThetaBurstFeatureExtraction/requirements.txt
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [verifyAndMoveFiles (line 57)] File already in correct directory: C:/Users/{UserName}/ThetaBurstFeatureExtraction/src/call_python_bycycle.m
+
+[... Similar entries for other files ...]
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [verifyAndMoveFiles (line 105)] Added src directory and its subdirectories to MATLAB path.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [verifyAndMoveFiles (line 109)] src directory successfully added to MATLAB path.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [setupProject (line 45)] All required files are verified and correctly placed.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [verifyRawDataFiles (line 55)] All operations completed successfully.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [setupProject (line 55)] All required raw data files are present.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [checkMetaDataFile (line 34)] metaData.mat is already in the correct location.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [setupProject (line 64)] metaData.mat verification completed.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [setupProject (line 70)] Project setup completed successfully.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [MAIN (line 43)] Brain regions (regex patterns) have been defined.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [loadMetaData (line 37)] Loaded {NumberOfSessions} session(s) from metadata.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [selectSubjectsAndRegions (line 49)] Selected Subject(s): "{SubjectIDList}"
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [selectSubjectsAndRegions (line 50)] Selected Brain Region(s): "{BrainRegionList}"
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 27)] Initializing subjectsData structure.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 31)] Verifying presence of "defineTrialsStCat" function.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 38)] Starting subject processing loop.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 41)] Performing preliminary processing of subject: {SubjectID}.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 46)] Attempting to load subject data from: C:/Users/{UserName}/ThetaBurstFeatureExtraction/data/raw/{SubjectID}_allChanSpkRmvl.mat.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 53)] Loaded subject data for {SubjectID} successfully.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 56)] Defining trials using "defineTrialsStCat" function.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 58)] Trial definition completed successfully.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 62)] Removing "datasamples" field from subject data.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 68)] Checking for SUA info file at: C:/Users/{UserName}/ThetaBurstFeatureExtraction/data/raw/{SubjectID}_suaInfo.mat.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 71)] Loading SUA info.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 74)] SUA info loaded successfully.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 81)] Assigning pre-processed data to subjectsData structure for subject {SubjectID}.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 87)] Saving initial pre-processed data to: C:/Users/{UserName}/ThetaBurstFeatureExtraction/data/pre-processed/{SubjectID}_allChanSpkRmvl_trialInfo.mat.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 91)] Successfully completed preliminary processing and saved data for subject "{SubjectID}" at: C:/Users/{UserName}/ThetaBurstFeatureExtraction/data/pre-processed/{SubjectID}_allChanSpkRmvl_trialInfo.mat.
+
+[... Similar entries for other subjects ...]
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [processSubjects (line 100)] Completed preliminary pre-processing of all subjects.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [extractLFP (line 55)] Extracting LFP data for subject {SubjectID} from selected brain regions: {BrainRegionList}.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [extractLFP (line 62)] LFP data extracted successfully for subject {SubjectID}.
+
+[... Similar entries for other subjects ...]
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [filterSubjectsLFP (line 76)] Extracted LFP data from [{RegionName}] and saved for subject [{SubjectID}] to: [C:/Users/{UserName}/ThetaBurstFeatureExtraction/data/pre-processed/{SubjectID}_{RegionName}_selectedChanSpkRmvl.mat].
+
+[... Similar entries for other subjects ...]
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [filterSubjectsLFP (line 93)] Consolidated LFP data from [{BrainRegionList}] and saved for subject(s) [{CombinedSubjectIDs}] to: [C:/Users/{UserName}/ThetaBurstFeatureExtraction/data/pre-processed/{CombinedSubjectIDs}_{BrainRegionList}_selectedChanSpkRmvlConsolidated.mat].
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [recycleMetaData (line 38)] Moved original metaData.mat to recycle directory: C:/Users/{UserName}/ThetaBurstFeatureExtraction/recycle
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [saveExtendedMetadata (line 45)] Extended metadata saved and verified at: C:/Users/{UserName}/ThetaBurstFeatureExtraction/data/metaDataExt.mat
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [MAIN (line 90)] MATLAB pre-processing complete.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [MAIN (line 95)] {CurrentDateTimeStr} Initializing theta burst feature extraction pipeline in Python... Elapsed time: {ElapsedTime} seconds
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 25)] Loaded metaDataExt from MAT-file.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 46)] Creating Python virtual environment...
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 52)] Running virtualenv with interpreter {PythonInterpreterPath}
+Using base prefix '{PythonBasePrefix}'
+New python executable in {VirtualEnvPath}\Scripts\python.exe
+Also creating executable in {VirtualEnvPath}\Scripts\python.exe
+Installing setuptools, pip, wheel...
+done.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 58)] Virtual environment created successfully.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 68)] Installing MATLAB Engine in the virtual environment...
+
+Collecting matlabengine=={MATLABVersion}
+  Using cached matlabengine-{MATLABVersion}-py3.{PythonVersion}.egg
+Processing {PathToEggFile}
+Adding matlabengine {MATLABVersion} to easy-install.pth file
+
+Installed {VirtualEnvPath}\Lib\site-packages\matlabengine-{MATLABVersion}-py3.{PythonVersion}.egg
+Processing dependencies for matlabengine=={MATLABVersion}
+Finished processing dependencies for matlabengine=={MATLABVersion}
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 81)] MATLAB Engine installed successfully in the virtual environment.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 87)] MATLAB Engine is available in the virtual environment.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 103)] Installing Python dependencies...
+
+Collecting numpy=={NumPyVersion} (from -r {RequirementsFilePath} (line 1))
+  Downloading numpy-{NumPyVersion}-cp{PythonVersion}-cp{PythonVersion}-win_amd64.whl (15.0 MB)
+     |████████████████████████████████| 15.0 MB
+
+Collecting pandas>=1.3.0 (from -r {RequirementsFilePath} (line 2))
+  Downloading pandas-{PandasVersion}-cp{PythonVersion}-cp{PythonVersion}-win_amd64.whl (11.6 MB)
+     |████████████████████████████████| 11.6 MB
+
+[... Similar entries for other packages ...]
+
+Installing collected packages: numpy, pandas, scipy, h5py, hdf5storage, dask, distributed, tqdm, psutil, neurodsp, bycycle
+Successfully installed numpy-{NumPyVersion} pandas-{PandasVersion} scipy-{ScipyVersion} h5py-{H5pyVersion} hdf5storage-{HDF5StorageVersion} dask-{DaskVersion} distributed-{DistributedVersion} tqdm-{TQDMVersion} psutil-{PsutilVersion} neurodsp-{NeuroDSPVersion} bycycle-{BycycleVersion}
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 130)] Python dependencies installed successfully.
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 136)] Executing RunBycycle.py...
+
+		**See .\RunBycycle.log\PythonLog_YYYYMMDD_HHMMSS for full information...**
+
+[YYYY-MM-DD HH:MM:SS.mmm] [INFO] [call_python_bycycle (line 187)] Python script executed successfully.

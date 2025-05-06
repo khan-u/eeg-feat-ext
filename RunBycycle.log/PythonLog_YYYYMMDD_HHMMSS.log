@@ -1,0 +1,77 @@
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Log file initialized successfully.
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Logging setup complete. Log file path: C:\Users\{UserName}\ThetaBurstFeatureExtraction\logs\PythonLog_{Timestamp}.log
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Starting MATLAB engine...
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - MATLAB engine started successfully.
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Loading meta data file: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\metaDataExt.mat
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Variables available in MATLAB workspace: {VariablesList}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Type of 'metaDataExt' retrieved from MATLAB: {MetaDataType}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Converting MATLAB struct or dict to Python dictionary...
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Type of 'metaDataExt_py' after conversion: {MetaDataPyType}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - MATLAB engine stopped. Python script is continuing to execute without issue.
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Included Subject IDs: {SubjectIDList}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Created directory: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Created directory: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID2}
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Final Selected Regions: {SelectedRegions}
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Processing Session: {SubjectID1}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Created directory for brain region: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{BrainRegion1}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Created directory for brain region: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{BrainRegion2}
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Searching for .mat files with pattern: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\pre-processed\{SubjectID1}_*selectedChanSpkRmvl.mat
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Found {NumberOfFilesFound} files matching the pattern.
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Found LFP Data from selected brain regions: {LFPDataFilePath}
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Opened .mat file: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\pre-processed\{MatFileName}.mat
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - labels_data shape: ({LabelsDataShape})
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Extracted labels: {LabelsList}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Number of trials for brain region '{BrainRegion}': {NumberOfTrials}
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - lfp_data_refs shape: ({LFPDataRefsShape})
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - time_data_refs shape: ({TimeDataRefsShape})
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Trial {TrialNumber}: Applied time indexing. Remaining samples: {NumberOfSamples}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Trial {TrialNumber} - time_vector shape: ({TimeVectorShape}), lfp_trial_data shape: ({LFPTrialDataShape})
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Number of channels based on lfp_trial_data: {NumberOfChannels}
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Total number of trial-channel combinations: {TotalTrialChannelCombinations}
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Extracted raw signal for trial {TrialNumber}, channel {ChannelNumber} with shape ({SignalLength},).
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Applied lowpass filter: f_lowpass={LowpassFrequency}Hz.
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Computed Bycycle features for trial {TrialNumber}, channel {ChannelNumber}.
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Features extracted for trial {TrialNumber}, channel {ChannelNumber}.
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Extracted raw signal for trial {LastTrialNumber}, channel {LastChannelNumber} with shape ({SignalLength},).
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Applied lowpass filter: f_lowpass={LowpassFrequency}Hz.
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Computed Bycycle features for trial {LastTrialNumber}, channel {LastChannelNumber}.
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Features extracted for trial {LastTrialNumber}, channel {LastChannelNumber}.
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Preparing to write region-specific CSV: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{BrainRegion}\{SubjectID1}_{BrainRegion}_bycycle_features_{Timestamp}.csv
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Appended trial {TrialNumber}, channel {ChannelNumber} to region-specific CSV.
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Appended trial {TrialNumber}, channel {NextChannelNumber} to region-specific CSV.
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Appended trial {LastTrialNumber}, channel {LastChannelNumber} to region-specific CSV.
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Region-specific CSV file created: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{BrainRegion}\{SubjectID1}_{BrainRegion}_bycycle_features_{Timestamp}.csv
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Validating CSV file: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{BrainRegion}\{SubjectID1}_{BrainRegion}_bycycle_features_{Timestamp}.csv
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Validation passed for 'C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{BrainRegion}\{SubjectID1}_{BrainRegion}_bycycle_features_{Timestamp}.csv'.
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Validation passed for region-specific CSV file: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{BrainRegion}\{SubjectID1}_{BrainRegion}_bycycle_features_{Timestamp}.csv
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Searching for region-specific CSV files with pattern: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\**\*_bycycle_features_*.csv
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Found {NumberOfRegionSpecificCSVs} region-specific CSV files for merging.
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Starting concatenation of region-specific CSV files for session '{SubjectID1}'.
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Wrote header from 'C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{FirstBrainRegion}\{SubjectID1}_{FirstBrainRegion}_bycycle_features_{FirstTimestamp}.csv' to merged CSV.
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Skipped header from 'C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{SecondBrainRegion}\{SubjectID1}_{SecondBrainRegion}_bycycle_features_{SecondTimestamp}.csv'.
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Merged CSV file created at: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{SubjectID1}_merged_bycycle_features_{Timestamp}.csv
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Validating CSV file: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{SubjectID1}_merged_bycycle_features_{Timestamp}.csv
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Validation passed for 'C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{SubjectID1}_merged_bycycle_features_{Timestamp}.csv'.
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Validation passed for merged CSV file: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{SubjectID1}_merged_bycycle_features_{Timestamp}.csv
+[YYYY-MM-DD HH:MM:SS,mmm] - DEBUG - Found {NumberOfMergedCSVs} merged CSV files for session '{SubjectID1}'.
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Deleted older merged CSV file: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID1}\{SubjectID1}_merged_bycycle_features_{OldTimestamp}.csv
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Processing Session: {SubjectID2}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Created directory for brain region: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID2}\{BrainRegion1}
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Created directory for brain region: C:\Users\{UserName}\ThetaBurstFeatureExtraction\data\cycle_features\{SubjectID2}\{BrainRegion2}
+...
+[Similar processing steps for SubjectID2]
+...
+[YYYY-MM-DD HH:MM:SS,mmm] - INFO - Script execution completed in 0h 1m 4s.

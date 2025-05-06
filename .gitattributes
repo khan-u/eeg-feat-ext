@@ -1,0 +1,32 @@
+# Handle line endings automatically for text files
+* text=auto
+
+# Force LF for certain text files regardless of OS
+*.sh   text eol=lf
+*.bash text eol=lf
+
+# Use CRLF for Windows-specific files
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+
+# Mark binary files to avoid line-ending conversion
+*.png  binary
+*.jpg  binary
+*.gif  binary
+*.exe  binary
+*.dll  binary
+
+# Handle markdown and documentation files as text
+*.md   text
+*.txt  text
+
+# Handle common programming language files as text
+*.py   text eol=lf
+*.js   text eol=lf
+*.java text eol=lf
+*.m    text eol=lf
+*.c    text eol=lf
+*.cpp  text eol=lf
+
+# Prevent line ending conversion for logs
+logs/* -text
