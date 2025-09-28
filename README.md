@@ -1,6 +1,5 @@
 
 # eeg-feat-ext   
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
 [![Python 3.9–3.12](https://img.shields.io/badge/Python-3.9–3.12-blue.svg)](#installation)
 
 *Developed for high-throughput electrophysiology data, **eeg-feat-ext** transforms large-scale human brain recordings into clean, structured features — ready for downstream analysis, predictive modeling, and real-time monitoring pipelines.*
