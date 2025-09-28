@@ -17,10 +17,11 @@
 
 High-throughput feature extraction code processing 21.8 GiB of raw iEEG data across 36 human subjects. Used in analyses performed in *Nature* Publication (2024).
 
-> *“Control of working memory by phase–amplitude coupling of human hippocampal neurons”*
-  📄 [Read Article](https://www.nature.com/articles/s41586-024-07309-z)
-  📊 [Published Analysis Figure](https://www.nature.com/articles/s41586-024-07309-z#Fig9)
-  📁 [DANDI Dataset](https://dandiarchive.org/dandiset/000673)
+> *“Control of working memory by phase–amplitude coupling of human hippocampal neurons”*  
+📄 [Read Article](https://www.nature.com/articles/s41586-024-07309-z)  
+📊 [Published Analysis Figure](https://www.nature.com/articles/s41586-024-07309-z#Fig9)  
+📁 [DANDI Dataset](https://dandiarchive.org/dandiset/000673)
+
 
 ---
 
