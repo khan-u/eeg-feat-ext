@@ -1,5 +1,5 @@
 
-# eeg-feat-ext 🧠  
+# eeg-feat-ext   
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
 [![Python 3.9–3.12](https://img.shields.io/badge/Python-3.9–3.12-blue.svg)](#installation)
 
@@ -14,7 +14,7 @@
 
 ---
 
-##  ❓ The Big Question
+## Question
 
 **Task**: Subjects memorized short lists—1 item (low load) or 3 items (high load)—then judged whether a probe item had appeared in the original list.
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 🔧 What This Pipeline Does
+# What This Pipeline Does
 
 - Extracts **condition-specific neural features** from noisy iEEG signals  
 - Controls for waveform artifacts to ensure signal **fidelity**  
@@ -32,7 +32,7 @@
 
 ---
 
-## 🎯 Why It Matters
+## Why It Matters
 
 - Enables **detection of latent cognitive states** in brain data  
 - Statistically separates memory load conditions via waveform metrics  
@@ -40,36 +40,20 @@
 
 ---
 
-## ✅ Key Findings
+## Key Findings
 
 > “We did not find evidence for any of those factors.”  
 > — Referring to waveform asymmetries as confounds  
 >
-> “These findings suggest that PAC is related to ongoing WM processes during the maintenance period in the hippocampus.”
-
----
-
-## 🚀 Real-World Impact
-
-**Human Cognitive Biomarker Identified:**  
+> “These findings suggest that PAC is related to ongoing WM processes during the maintenance period in the hippocampus.” 
 *Coordinated brain oscillations in the hippocampus **track working memory load**.*
 
-- ✅ Ruled out spurious signal artifacts using waveform shape controls  
-- ✅ Confirmed **oscillatory synchrony** (PAC) as a reliable index of memory maintenance  
-- 📊 Findings visualized in [**Extended Figure 3**](https://www.nature.com/articles/s41586-024-07309-z#Fig9)
+- Ruled out spurious signal artifacts using waveform shape controls  
+- Confirmed **oscillatory synchrony** (PAC) as a reliable index of memory maintenance  
+- Findings visualized in [**Extended Figure 3**](https://www.nature.com/articles/s41586-024-07309-z#Fig9)
 
 ---
-## ♻️ Transferable Analytics + ML
-
-| Neuroscience Application                        | Industry Parallel                             |
-|--------------------------------------------------|-----------------------------------------------|
-| Memory classification via waveform shape         | Behavioral segmentation, attention modeling   |
-| Phase-amplitude coupling (PAC) as latent signal  | User state dynamics, anomaly detection        |
-| High-density iEEG signal processing              | IoT / biosensor analytics                     |
-| Multi-subject LFP preprocessing on CPU           | Big data ETL in low-resource environments     |
-
----
-## 📦 Pipeline Highlights
+## Pipeline Features
 
 | Feature                | Description                                                    |
 |------------------------|----------------------------------------------------------------|
@@ -85,7 +69,7 @@
 - Runs entirely on **CPU** — no GPU required
 ---
 
-## ⚙️ Pipeline Mechanics
+## Pipeline Mechanics
 
 -  Preprocessing (MATLAB) → metaDataExt.mat → RunBycycle.py (Python) → Cycle-level CSV features → Merged subject-level CSV
 ---  
@@ -96,7 +80,7 @@
 
 ---
 
-## 📊 Pipeline-Extracted Features (.csv)
+## Pipeline-Extracted Features (.csv)
 
 .data/cycle_features<br><br>
 └── SubjectID1/<br>
@@ -109,7 +93,7 @@
 - Subject-level CSV created after all region-level files are verified
 ---  
 
-## 📝 Pipeline-Generated Logs
+## Pipeline-Generated Logs
 
 | Log File                                                                       | Description                                                  
 |--------------------------------------------|---------------------------------------------------------------|
@@ -121,7 +105,7 @@
 - **Bycycle** — Cycle-by-cycle feature extraction by Cole & Voytek, _Journal of Neurophysiology (2019)_ 📘 [Docs](https://bycycle-tools.github.io)  
 - **NeuroDSP** — Neural time-series signal processing by Cole et al., _Journal of Open Source Software (2019)_ 📘 [Docs](https://neurodsp-tools.github.io)
 ---
-## ⚙️ Quick Start
+## Quick Start
 
 1. Clone the source code:
 ```bash
@@ -182,7 +166,7 @@ eeg-feat-ext/                           # Root of the feature-extraction pipelin
 │   ├── logMessage.m                    # Simple multi-level logger for structured console output
 │   ├── processSubjects.m               # Dynamically builds subject data structs
 │   ├── recycleMetaData.m               # Moves current metaData.mat to `/recycle` with timestamp
-│   ├── RunBycycle.py                   # 🚀 Python script to compute per-cycle waveform features via Bycycle
+│   ├── RunBycycle.py                   # Python script to compute per-cycle waveform features via Bycycle
 │   ├── saveExtendedMetadata.m          # Merges metadata and saves metaDataExt.mat
 │   ├── saveFolderTree.m                # (Optional) Prints the full directory structure to .txt
 │   ├── selectSubjectsAndRegions.m      # Lets user choose specific sessions/regions to run 
@@ -193,7 +177,7 @@ eeg-feat-ext/                           # Root of the feature-extraction pipelin
 │   └── verifyRawDataFiles.m            # Checks raw files are present before MATLAB starts
 ├── .gitattributes                      # Ensures consistent line endings across platforms
 ├── LICENSE                             # Open-source MIT license for reuse and modification
-├── MAIN.m                              # 🚀 Primary entry script that orchestrates full pipeline from MATLAB
+├── MAIN.m                              # Primary entry script that orchestrates full pipeline from MATLAB
 ├── README.md                           # This documentation file 
 └── requirements.txt                    # Python dependencies (Bycycle, NumPy, Pandas, etc.)
 ```
