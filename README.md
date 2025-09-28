@@ -3,11 +3,13 @@
 **eeg-feat-ext** *transforms large-scale human brain recordings into clean, structured features — ready for downstream analysis, predictive modeling, and real-time monitoring pipelines.*
 
 ---
-
 ## Credits
 
-* **Bycycle** — Cycle-by-cycle feature extraction by Cole & Voytek, *Journal of Neurophysiology (2019)*
-  📘 [Bycycle Docs](https://bycycle-tools.github.io) | 📘 [NeuroDSP Docs](https://neurodsp-tools.github.io) | 📘 [Publication](https://journals.physiology.org/doi/full/10.1152/jn.00273.2019)
+* **Bycycle** — Cycle-by-cycle feature extraction by Cole & Voytek, *Journal of Neurophysiology (2019)*  
+  📘 [Bycycle Docs](https://bycycle-tools.github.io)  
+  📘 [NeuroDSP Docs](https://neurodsp-tools.github.io)  
+  📘 [Publication](https://journals.physiology.org/doi/full/10.1152/jn.00273.2019)
+
 
 ---
 
