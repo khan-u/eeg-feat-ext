@@ -65,7 +65,7 @@
 - Hybrid orchestration in **MATLAB + Python**
 - Reproducible, cycle-level waveform feature extraction
 - Validated on real-world data (21.8 GiB, 36 subjects × 500+ channels)
-- Runs entirely on **CPU** — no GPU required
+- Runs entirely on **CPU** 
 ---
 
 ## Pipeline Mechanics
