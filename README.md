@@ -33,7 +33,7 @@ Are differences in **oscillatory synchrony (PAC)** between memory loads driven b
 
 **Neural Data:** 21.8 GiB of raw multi-site, multi-regional intracranial EEG data from 36 epilepsy patients.
 
-**Null Hypothesis:** Variation in theta-gamma phase amplitude coupling in the hippocampus does not explain observed differences in cognitive recall under high vs. low memory conditions.
+**Null Hypothesis:** Variation in theta-gamma phase amplitude coupling in the hippocampus explains observed differences in cognitive recall under high vs. low memory conditions.
 
 **Our Hypothesis:** Oscillatory synchrony correlation with memory recall performance cannot be explained entirely by spurious waveform artifacts.
 
