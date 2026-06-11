@@ -233,8 +233,122 @@ def main() -> None:
                   m_threshold_kwargs, fs, f_lowpass, f_theta, xlim)
 
 
+def _load_labels(labels_data: h5py.Dataset, f_mat: h5py.File, region_name: str) -> List[str]:
+    """Extracts channel label strings from an HDF5 labels dataset."""
+    labels = []
+    shape = labels_data.shape
+
+    def _decode_ref(ref, idx):
+        resolved = resolve_reference(f_mat, ref)
+        if resolved is not None:
+            return resolved.tobytes().decode('utf-8').strip()
+        logging.warning(f"Label for channel {idx} in region '{region_name}' is None. Assigned default.")
+        return f"Channel_{idx}"
+
+    if len(shape) == 1:
+        for i in range(shape[0]):
+            labels.append(_decode_ref(labels_data[i], i))
+    elif len(shape) == 2:
+        if shape[0] == 1:
+            for i in range(shape[1]):
+                labels.append(_decode_ref(labels_data[0][i], i))
+        elif shape[1] == 1:
+            for i in range(shape[0]):
+                labels.append(_decode_ref(labels_data[i][0], i))
+        else:
+            logging.error(f"Unexpected labels_data shape: {shape}")
+    else:
+        logging.error(f"Unexpected labels_data shape: {shape}")
+
+    return labels
+
+
+def _load_trials(lfp_data_refs, time_data_refs, f_mat, xlim):
+    """
+    Loads LFP trial data from HDF5 references, applies time windowing,
+    and drops trials with NaN/Inf values.
+    """
+    num_trials = lfp_data_refs.shape[1] if lfp_data_refs.shape[0] == 1 else lfp_data_refs.shape[0]
+    trials_extra = []
+    time_all = []
+
+    for i_trial in range(num_trials):
+        try:
+            if lfp_data_refs.shape[0] == 1:
+                lfp_cell_ref  = lfp_data_refs[0][i_trial]
+                time_cell_ref = time_data_refs[0][i_trial]
+            else:
+                lfp_cell_ref  = lfp_data_refs[i_trial][0]
+                time_cell_ref = time_data_refs[i_trial][0]
+
+            lfp_trial_data = resolve_reference(f_mat, lfp_cell_ref)
+            if lfp_trial_data is None:
+                logging.warning(f"LFP data for trial {i_trial} is None. Skipping.")
+                continue
+            lfp_trial_data = np.array(lfp_trial_data).T
+
+            time_vector = resolve_reference(f_mat, time_cell_ref)
+            if time_vector is None:
+                logging.warning(f"Time data for trial {i_trial} is None. Skipping.")
+                continue
+            time_vector = np.array(time_vector).flatten()
+
+            if lfp_trial_data.shape[0] != len(time_vector):
+                min_length     = min(lfp_trial_data.shape[0], len(time_vector))
+                lfp_trial_data = lfp_trial_data[:min_length, :]
+                time_vector    = time_vector[:min_length]
+                logging.debug(f"Trimmed trial {i_trial} to {min_length} samples.")
+
+            time_vector    = time_vector.astype(np.float64)
+            lfp_trial_data = lfp_trial_data.astype(np.float64)
+
+            tidx           = np.logical_and(time_vector >= xlim[0], time_vector < xlim[1])
+            time_vector    = time_vector[tidx]
+            lfp_trial_data = lfp_trial_data[tidx, :]
+
+            if np.isnan(lfp_trial_data).any() or np.isinf(lfp_trial_data).any():
+                logging.warning(f"Trial {i_trial} contains NaN or Inf values. Skipping.")
+                continue
+
+            trials_extra.append(lfp_trial_data)
+            time_all.append(time_vector)
+            logging.info(f"Trial {i_trial}: shape {lfp_trial_data.shape}")
+
+        except Exception as e:
+            logging.error(f"Error processing trial {i_trial}: {e}", exc_info=True)
+            continue
+
+    return trials_extra, time_all
+
+
 def _run_sessions(sessionIDarr, final_selected_regions, csv_path, preProcessedPath,
                   m_threshold_kwargs, fs, f_lowpass, f_theta, xlim):
+    for session_id in sessionIDarr:
+        logging.info(f"Processing session: {session_id}")
+
+        for region_name in final_selected_regions:
+            pt_feature_regional_dir = os.path.join(csv_path, session_id, region_name)
+            try:
+                pathlib.Path(pt_feature_regional_dir).mkdir(parents=True, exist_ok=True)
+            except Exception as e:
+                logging.error(f"Failed to create directory {pt_feature_regional_dir}: {e}", exc_info=True)
+                continue
+
+        pattern = os.path.join(preProcessedPath, f"{session_id}*selectedChanSpkRmvl.mat")
+        matching_files = glob.glob(pattern)
+        if matching_files:
+            mat_file_path = matching_files[0]
+            logging.info(f"Found LFP file: {mat_file_path}")
+        else:
+            logging.error(f"No file found for session '{session_id}' ending with 'selectedChanSpkRmvl.mat'. Skipping.")
+            continue
+
+        _run_regions(session_id, final_selected_regions, mat_file_path, csv_path,
+                     m_threshold_kwargs, fs, f_lowpass, f_theta, xlim)
+
+
+def _run_regions(session_id, final_selected_regions, mat_file_path, csv_path,
+                 m_threshold_kwargs, fs, f_lowpass, f_theta, xlim):
     pass
 
 
