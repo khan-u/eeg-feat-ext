@@ -349,7 +349,171 @@ def _run_sessions(sessionIDarr, final_selected_regions, csv_path, preProcessedPa
 
 def _run_regions(session_id, final_selected_regions, mat_file_path, csv_path,
                  m_threshold_kwargs, fs, f_lowpass, f_theta, xlim):
-    pass
+    session_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    for region_name in final_selected_regions:
+        try:
+            with h5py.File(mat_file_path, 'r') as f_mat:
+                logging.debug(f"Opened .mat file: {mat_file_path}")
+
+                if 'filteredSubjectData' not in f_mat:
+                    logging.error(f"'filteredSubjectData' not found in '{mat_file_path}'. Skipping session.")
+                    continue
+
+                fsd = f_mat['filteredSubjectData']
+
+                labels_key = f"{region_name}_labels"
+                if labels_key not in fsd:
+                    logging.warning(f"'{labels_key}' not found. Skipping region '{region_name}'.")
+                    continue
+                labels = _load_labels(fsd[labels_key], f_mat, region_name)
+                logging.debug(f"Extracted labels: {labels}")
+
+                lfp_key = f"{region_name}_selectedChanSpkRmvl"
+                if lfp_key not in fsd:
+                    logging.warning(f"'{lfp_key}' not found. Skipping region '{region_name}'.")
+                    continue
+
+                if 'time' not in fsd:
+                    logging.warning(f"'time' not found. Skipping region '{region_name}'.")
+                    continue
+
+                trials_extra, _ = _load_trials(fsd[lfp_key], fsd['time'], f_mat, xlim)
+
+                if not trials_extra:
+                    logging.warning(f"No valid trials for region '{region_name}' in session '{session_id}'.")
+                    continue
+
+                num_channels = trials_extra[-1].shape[1]
+                if len(labels) != num_channels:
+                    logging.warning(f"Label count ({len(labels)}) differs from channel count ({num_channels}). Truncating.")
+                    labels = labels[:num_channels]
+
+                tuples = [
+                    [i_trial, j_channel]
+                    for i_trial in range(len(trials_extra))
+                    for j_channel in range(num_channels)
+                ]
+                logging.debug(f"Total trial-channel combinations: {len(tuples)}")
+
+                try:
+                    dataframes = get_df(
+                        trials_extra, tuples,
+                        threshold_kwargs=m_threshold_kwargs,
+                        fs=fs, f_lowpass=f_lowpass, f_theta=f_theta
+                    )
+                except Exception as e:
+                    logging.error(f"Feature extraction failed for session {session_id}, region {region_name}: {e}", exc_info=True)
+                    continue
+
+                region_csv_path = os.path.join(
+                    csv_path, session_id, region_name,
+                    f"{session_id}_{region_name}_bycycle_features_{session_timestamp}.csv"
+                )
+
+                try:
+                    with open(region_csv_path, 'w', newline='') as region_csv_file:
+                        header_written = False
+                        for i_df, tuple_info in enumerate(tuples):
+                            try:
+                                df = dataframes[i_df]
+                                if df is not None and not df.empty:
+                                    df = df.copy()
+                                    df.insert(0, 'trial',         tuple_info[0])
+                                    df.insert(1, 'channel_idx',   tuple_info[1])
+                                    df.insert(2, 'channel_label', labels[tuple_info[1]])
+                                    df.to_csv(region_csv_file, header=not header_written, index=False, mode='a')
+                                    if not header_written:
+                                        header_written = True
+                            except Exception as e:
+                                logging.warning(f"Failed to write row for index {i_df}: {e}", exc_info=True)
+                                continue
+
+                    logging.info(f"Region CSV created: {region_csv_path}")
+
+                    is_valid = validate_csv(file_path=region_csv_path, expected_min_rows=1)
+                    if not is_valid:
+                        logging.error(f"Validation failed for: {region_csv_path}")
+                    else:
+                        logging.info(f"Validation passed for: {region_csv_path}")
+
+                except Exception as e:
+                    logging.error(f"Failed to write region CSV '{region_csv_path}': {e}", exc_info=True)
+                    continue
+
+        except Exception as e:
+            logging.error("Failed to load LFP data. Bycycle feature extraction failed.", exc_info=True)
+            continue
+
+    _merge_region_csvs(session_id, csv_path, session_timestamp)
+
+
+def _merge_region_csvs(session_id: str, csv_path: str, session_timestamp: str) -> None:
+    """Concatenates all region CSVs for a session into one merged file, keeping only the latest."""
+    try:
+        session_dir    = os.path.join(csv_path, session_id)
+        merged_csv_path = os.path.join(
+            session_dir,
+            f"{session_id}_merged_bycycle_features_{session_timestamp}.csv"
+        )
+
+        region_csv_pattern = os.path.join(session_dir, "**", "*_bycycle_features_*.csv")
+        region_csv_files   = glob.glob(region_csv_pattern, recursive=True)
+        logging.debug(f"Found {len(region_csv_files)} region CSV files to merge.")
+
+        if region_csv_files:
+            with open(merged_csv_path, 'w', newline='') as merged_csv_file:
+                header_written = False
+                for region_csv in region_csv_files:
+                    try:
+                        with open(region_csv, 'r') as rc_file:
+                            for idx_line, line in enumerate(rc_file):
+                                if idx_line == 0:
+                                    if not header_written:
+                                        merged_csv_file.write(line)
+                                        header_written = True
+                                else:
+                                    merged_csv_file.write(line)
+                    except Exception as e:
+                        logging.error(f"Failed to read region CSV '{region_csv}': {e}", exc_info=True)
+                        continue
+
+            logging.info(f"Merged CSV created: {merged_csv_path}")
+
+            is_valid_merged = validate_csv(file_path=merged_csv_path, expected_min_rows=1)
+            if not is_valid_merged:
+                logging.error(f"Validation failed for merged CSV: {merged_csv_path}")
+            else:
+                logging.info(f"Validation passed for merged CSV: {merged_csv_path}")
+
+            merged_pattern = os.path.join(session_dir, f"{session_id}_merged_bycycle_features_*.csv")
+            merged_files   = glob.glob(merged_pattern)
+
+            def _extract_timestamp(file_path: str) -> Optional[datetime]:
+                match = re.search(r'_merged_bycycle_features_(\d{8}_\d{6})\.csv$', file_path)
+                if match:
+                    try:
+                        return datetime.strptime(match.group(1), "%Y%m%d_%H%M%S")
+                    except ValueError:
+                        return None
+                return None
+
+            merged_with_ts = [(f, _extract_timestamp(f)) for f in merged_files]
+            merged_with_ts = [(f, ts) for f, ts in merged_with_ts if ts is not None]
+            merged_with_ts.sort(key=lambda x: x[1], reverse=True)
+
+            if len(merged_with_ts) > 1:
+                for file, _ in merged_with_ts[1:]:
+                    try:
+                        os.remove(file)
+                        logging.info(f"Deleted older merged CSV: {file}")
+                    except Exception as e:
+                        logging.error(f"Failed to delete '{file}': {e}", exc_info=True)
+        else:
+            logging.warning(f"No region CSVs found for session '{session_id}'. Merged CSV not created.")
+
+    except Exception as e:
+        logging.error(f"Failed to merge region CSVs for session '{session_id}': {e}", exc_info=True)
 
 
 if __name__ == "__main__":
